@@ -99,6 +99,27 @@ class WarehouseController extends AbstractActionController
 
     public function deleteAction()
     {
-        //$this->layout('album/delete');
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('warehouse');
+        }
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'No');
+
+            if ($del == 'Yes') {
+                $id = (int) $request->getPost('id');
+                $this->getWarehouseTable()->deleteWarehouse($id);
+            }
+
+            // Redirect to list of albums
+            return $this->redirect()->toRoute('warehouse');
+        }
+
+        return array(
+            'id'    => $id,
+            'warehouse' => $this->getWarehouseTable()->getWarehouse($id)
+        );
     }
 }

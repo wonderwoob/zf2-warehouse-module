@@ -38,8 +38,8 @@ class WarehouseTable
     public function saveWarehouse(Warehouse $album)
     {
         $data = array(
-            'artist' => $album->artist,
-            'title'  => $album->title,
+            'name' => $album->name,
+            'description'  => $album->description,
         );
 
         $id = (int) $album->id;

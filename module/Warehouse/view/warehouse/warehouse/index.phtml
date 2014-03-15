@@ -1,0 +1,29 @@
+<?php
+$title = 'My Warehouse';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('warehouse', array('action'=>'add'));?>"><?php echo $this->translate('Add new Warehouse'); ?></a>
+</p>
+
+<table class="table">
+    <tr>
+        <th><?php echo $this->translate('Name'); ?></th>
+        <th><?php echo $this->translate('Description'); ?></th>
+        <th>&nbsp;</th>
+    </tr>
+
+    <?php foreach ($warehouses as $warehouse) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($warehouse->name);?></td>
+            <td><?php echo $this->escapeHtml($warehouse->description);?></td>
+            <td>
+                <a href="<?php echo $this->url('warehouse',
+                    array('action'=>'edit', 'id' => $warehouse->id));?>">Edit</a>
+                <a href="<?php echo $this->url('warehouse',
+                    array('action'=>'delete', 'id' => $warehouse->id));?>">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>

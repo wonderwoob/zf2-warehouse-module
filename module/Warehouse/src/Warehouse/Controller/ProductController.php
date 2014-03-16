@@ -7,10 +7,11 @@
  */
 namespace Warehouse\Controller;
 
+use Warehouse\Model\Product;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-//use Warehouse\Model\Warehouse;
-//use Warehouse\Form\WarehouseForm;
+use Warehouse\Model\Warehouse;
+use Warehouse\Form\ProductForm;
 
 class ProductController extends AbstractActionController
 {
@@ -34,32 +35,32 @@ class ProductController extends AbstractActionController
 
     public function addAction()
     {
-        /*$form = new WarehouseForm();
+        $form = new ProductForm();
         $form->get('submit')->setValue('Add');
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $warehouse = new Warehouse();
+            $warehouse = new Product();
             $form->setInputFilter($warehouse->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
                 $warehouse->exchangeArray($form->getData());
-                $this->getWarehouseTable()->saveWarehouse($warehouse);
+                $this->getProductTable()->saveProduct($warehouse);
 
                 // Redirect to list of albums
-                return $this->redirect()->toRoute('warehouse');
+                return $this->redirect()->toRoute('product');
             }
         }
-        return array('form' => $form);*/
+        return array('form' => $form);
 
     }
 
     public function editAction()
     {
-        /*$id = (int) $this->params()->fromRoute('id', 0);
+        $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
-            return $this->redirect()->toRoute('warehouse', array(
+            return $this->redirect()->toRoute('product', array(
                 'action' => 'add'
             ));
         }
@@ -67,15 +68,15 @@ class ProductController extends AbstractActionController
         // Get the Album with the specified id.  An exception is thrown
         // if it cannot be found, in which case go to the index page.
         try {
-            $album = $this->getWarehouseTable()->getWarehouse($id);
+            $album = $this->getProductTable()->getProduct($id);
         }
         catch (\Exception $ex) {
-            return $this->redirect()->toRoute('warehouse', array(
+            return $this->redirect()->toRoute('product', array(
                 'action' => 'index'
             ));
         }
 
-        $form  = new WarehouseForm();
+        $form  = new ProductForm();
         $form->bind($album);
         $form->get('submit')->setAttribute('value', 'Edit');
 
@@ -85,23 +86,23 @@ class ProductController extends AbstractActionController
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                $this->getWarehouseTable()->saveWarehouse($album);
+                $this->getProductTable()->saveProduct($album);
 
                 // Redirect to list of albums
-                return $this->redirect()->toRoute('warehouse');
+                return $this->redirect()->toRoute('product');
             }
         }
         return array(
             'id' => $id,
             'form' => $form,
-        );*/
+        );
     }
 
     public function deleteAction()
     {
-        /*$id = (int) $this->params()->fromRoute('id', 0);
+        $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
-            return $this->redirect()->toRoute('warehouse');
+            return $this->redirect()->toRoute('product');
         }
 
         $request = $this->getRequest();
@@ -110,16 +111,16 @@ class ProductController extends AbstractActionController
 
             if ($del == 'Yes') {
                 $id = (int) $request->getPost('id');
-                $this->getWarehouseTable()->deleteWarehouse($id);
+                $this->getProductTable()->deleteProduct($id);
             }
 
             // Redirect to list of albums
-            return $this->redirect()->toRoute('warehouse');
+            return $this->redirect()->toRoute('product');
         }
 
         return array(
             'id'    => $id,
-            'warehouse' => $this->getWarehouseTable()->getWarehouse($id)
-        );*/
+            'product' => $this->getProductTable()->getProduct($id)
+        );
     }
 }

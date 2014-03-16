@@ -12,6 +12,7 @@ $this->headTitle($title);
         <th><?php echo $this->translate('code'); ?></th>
         <th><?php echo $this->translate('Name'); ?></th>
         <th><?php echo $this->translate('Description'); ?></th>
+        <th><?php echo $this->translate('Status'); ?></th>
         <th>&nbsp;</th>
     </tr>
 
@@ -20,10 +21,11 @@ $this->headTitle($title);
             <td><?php echo $this->escapeHtml($product->code);?></td>
             <td><?php echo $this->escapeHtml($product->name);?></td>
             <td><?php echo $this->escapeHtml($product->description);?></td>
+            <td><?php echo $this->escapeHtml($product->status);?></td>
             <td>
-                <a href="<?php echo $this->url('warehouse',
+                <a href="<?php echo $this->url('product',
                     array('action'=>'edit', 'id' => $product->id));?>">Edit</a>
-                <a href="<?php echo $this->url('warehouse',
+                <a href="<?php echo $this->url('product',
                     array('action'=>'delete', 'id' => $product->id));?>">Delete</a>
             </td>
         </tr>

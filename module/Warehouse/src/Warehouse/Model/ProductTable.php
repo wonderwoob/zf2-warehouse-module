@@ -38,8 +38,10 @@ class ProductTable
     public function saveProduct(Product $album)
     {
         $data = array(
+            'code' => $album->code,
             'name' => $album->name,
             'description'  => $album->description,
+            'status'  => $album->status,
         );
 
         $id = (int) $album->id;

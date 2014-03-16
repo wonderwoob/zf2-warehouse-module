@@ -3,6 +3,8 @@ namespace Warehouse;
 
 use Warehouse\Model\Warehouse;
 use Warehouse\Model\WarehouseTable;
+use Warehouse\Model\Product;
+use Warehouse\Model\ProductTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
@@ -39,6 +41,17 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Warehouse());
                     return new TableGateway('Warehouse', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Warehouse\Model\ProductTable' =>  function($sm) {
+                    $tableGateway = $sm->get('ProductTableGateway');
+                    $table = new ProductTable($tableGateway);
+                    return $table;
+                },
+                'ProductTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Product());
+                    return new TableGateway('Product', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );

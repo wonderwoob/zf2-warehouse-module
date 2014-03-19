@@ -27,10 +27,9 @@
     </head>
 
     <body>
-    <?php echo $this->navigation()->breadcrumbs(); ?>
-
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
+
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
@@ -40,7 +39,15 @@
                     <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
+
+                    <?php
+                        echo $this->navigation('navigation')
+                                ->menu()
+                                ->setMinDepth(0)
+                                ->setMaxDepth(0)
+                                ->setUlClass('nav navbar-nav');
+                    ?>
+                    <!--<ul class="nav navbar-nav">
                         <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#"><?php echo $this->translate('Warehouse') ?> <b class="caret"></b></a>
@@ -56,10 +63,11 @@
                                 <li><a href="<?php echo $this->url('product', array('action' => 'add')); ?>"><?php echo $this->translate('Add') ?></a></li>
                             </ul>
                         </li>
-                    </ul>
-                </div><!--/.nav-collapse -->
+                    </ul>-->
+                </div>
             </div>
         </nav>
+        <?php echo $this->navigation('navigation')->breadcrumbs()->setMinDepth(0)->setPartial(array('partial/breadcrumb.phtml','default')); ?>
         <div class="container">
             <?php echo $this->content; ?>
             <hr>
